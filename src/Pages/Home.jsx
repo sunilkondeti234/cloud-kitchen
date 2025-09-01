@@ -5,7 +5,7 @@ function Home() {
         Welcome to Cloud Kitchen 🍲
       </h1>
       <p className="text-gray-600 mt-4">
-        This is your homepage. Soon we’ll connect Firebase!
+        Your online food & pickle store is live!
       </p>
     </div>
   );
