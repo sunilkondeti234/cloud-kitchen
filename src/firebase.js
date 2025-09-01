@@ -1,22 +1,26 @@
-// Firebase placeholder setup. Fill with your own values from Firebase Console.
-import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+// src/firebase.js
 
+// Import the functions you need
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
-}
+  apiKey: "AIzaSyDk3S7ZyMWF_NMsJQQsS2WO56T8KdTYhe8",
+  authDomain: "cloud-kitchen-1e39e.firebaseapp.com",
+  projectId: "cloud-kitchen-1e39e",
+  storageBucket: "cloud-kitchen-1e39e.firebasestorage.app",
+  messagingSenderId: "662546331171",
+  appId: "1:662546331171:web:7c6e25d20a3517462d6396",
+  measurementId: "G-G4ST38JWJC"
+};
 
-let app, db
-try {
-  app = initializeApp(firebaseConfig)
-  db = getFirestore(app)
-} catch (e) {
-  console.warn('Firebase is not configured yet. Add your env keys in .env file.')
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-export { app, db }
+// Initialize services
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+export default app;
