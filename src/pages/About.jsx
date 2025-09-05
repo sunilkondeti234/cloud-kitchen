@@ -1,0 +1,1 @@
+export default function About() { return <h2 className="text-2xl">About Cloud Kitchen</h2>; }

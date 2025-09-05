@@ -1,0 +1,1 @@
+export default function Checkout() { return <h2 className="text-2xl">Checkout Page</h2>; }
