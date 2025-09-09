@@ -1,20 +1,15 @@
-// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// ✅ Your Firebase config (from Firebase Console)
 const firebaseConfig = {
-  apiKey: "AIzaSyDk3S7ZyMWF_NMsJQQsS2WO56T8KdTYhe8",
-  authDomain: "cloud-kitchen-1e39e.firebaseapp.com",
-  projectId: "cloud-kitchen-1e39e",
-  storageBucket: "cloud-kitchen-1e39e.appspot.com", // 🔥 fixed `.app` → `.appspot.com`
-  messagingSenderId: "662546331171",
-  appId: "1:662546331171:web:7c6e25d20a3517462d6396",
-  measurementId: "G-G4ST38JWJC"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// ✅ Export Firestore database
 export const db = getFirestore(app);
