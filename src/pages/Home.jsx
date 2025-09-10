@@ -2,38 +2,42 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-const Home = () => {
-  const [items, setItems] = useState([]);
+export default function Home() {
+  const [pickles, setPickles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchData = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "pickles"));
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setItems(data);
+        const items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        console.log("Fetched items:", items);
+        setPickles(items);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchItems();
+
+    fetchData();
   }, []);
 
+  if (loading) return <p className="text-center mt-10">Loading...</p>;
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Welcome to Cloud Kitchen</h1>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-        {items.map((item) => (
-          <div key={item.id} style={{ border: "1px solid #ccc", padding: "10px" }}>
-            <h2>{item.name || "No Name"}</h2>
-            <p>Price: ₹{item.price || "N/A"}</p>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">🥒 Welcome to Cloud Kitchen</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {pickles.map((item) => (
+          <div key={item.id} className="bg-white shadow-md rounded-xl p-4">
+            <img src={item.image || "/placeholder.jpg"} alt={item.name} className="w-full h-40 object-cover rounded-md mb-3" />
+            <h2 className="text-xl font-semibold">{item.name}</h2>
+            <p className="text-gray-600">{item.description}</p>
+            <p className="font-bold mt-2">₹{item.price || "N/A"}</p>
           </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default Home;
+}
