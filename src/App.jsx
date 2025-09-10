@@ -1,26 +1,11 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import React from "react";
 import Home from "./pages/Home";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Orders from "./pages/Orders";
-import Checkout from "./pages/Checkout";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <Navbar />
-      <div className="p-6">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
-      </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold text-center mb-4">Welcome to Cloud Kitchen</h1>
+      <Home />
     </div>
   );
 }
-
-export default App;
